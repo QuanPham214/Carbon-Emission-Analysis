@@ -26,8 +26,8 @@ The dataset consists of 4 tables containing information regarding carbon emissio
 **6. product_name:** The name of the product associated with the emissions data.
 
 **7. weight_kg:** The weight of the product in kilograms.
-
 carbon_footprint_pcf: The carbon footprint of the product, measured in CO2 equivalent.
+
 **8. upstream_percent_total_pcf:** The percentage of the total carbon footprint attributed to upstream activities.
 
 **9. operations_percent_total_pcf:** The percentage of the total carbon footprint attributed to operations.
@@ -48,3 +48,67 @@ carbon_footprint_pcf: The carbon footprint of the product, measured in CO2 equiv
 **1. id:** Unique identifier for each country.
 
 **2. country_name:** The name of the country. 
+
+# III. Analyse data:
+## Question 1:Which products contribute the most to carbon emissions?
+
+```
+SELECT 
+	product_name,
+	ROUND(AVG(carbon_footprint_pcf),2) AS Average_Carbon_Footprint_pcf
+FROM product_emissions
+GROUP BY product_name
+ORDER BY AVG(carbon_footprint_pcf) DESC
+LIMIT 10;
+
+```
+| product_name                                                                                                                       | Average_Carbon_Footprint_pcf | 
+| ---------------------------------------------------------------------------------------------------------------------------------: | ---------------------------: | 
+| Wind Turbine G128 5 Megawats                                                                                                       | 3718044.00                   | 
+| Wind Turbine G132 5 Megawats                                                                                                       | 3276187.00                   | 
+| Wind Turbine G114 2 Megawats                                                                                                       | 1532608.00                   | 
+| Wind Turbine G90 2 Megawats                                                                                                        | 1251625.00                   | 
+| Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit.                                                                 | 191687.00                    | 
+| Retaining wall structure with a main wall (sheet pile): 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall | 167000.00                    | 
+| TCDE                                                                                                                               | 99075.00                     | 
+| Mercedes-Benz GLE (GLE 500 4MATIC)                                                                                                 | 91000.00                     | 
+| Mercedes-Benz S-Class (S 500)                                                                                                      | 85000.00                     | 
+| Mercedes-Benz SL (SL 350)                                                                                                          | 72000.00                     | 
+
+
+
+## Question 2: What are the industry groups of these products?
+```
+SELECT 
+	ig.industry_group, 
+	pe.product_name, 
+	ROUND(AVG(pe.carbon_footprint_pcf),2) AS Average_Carbon_Footprint_pcf
+FROM product_emissions AS pe
+	JOIN industry_groups AS ig ON pe.industry_group_id = ig.id
+GROUP BY industry_group, product_name
+ORDER BY AVG(carbon_footprint_pcf) DESC
+LIMIT 20;
+
+```
+| industry_group                     | product_name                                                                                                                       | Average_Carbon_Footprint_pcf | 
+| ---------------------------------: | ---------------------------------------------------------------------------------------------------------------------------------: | ---------------------------: | 
+| Electrical Equipment and Machinery | Wind Turbine G128 5 Megawats                                                                                                       | 3718044.00                   | 
+| Electrical Equipment and Machinery | Wind Turbine G132 5 Megawats                                                                                                       | 3276187.00                   | 
+| Electrical Equipment and Machinery | Wind Turbine G114 2 Megawats                                                                                                       | 1532608.00                   | 
+| Electrical Equipment and Machinery | Wind Turbine G90 2 Megawats                                                                                                        | 1251625.00                   | 
+| Automobiles & Components           | Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit.                                                                 | 191687.00                    | 
+| Materials                          | Retaining wall structure with a main wall (sheet pile): 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall | 167000.00                    | 
+| Materials                          | TCDE                                                                                                                               | 99075.00                     | 
+| Automobiles & Components           | Mercedes-Benz GLE (GLE 500 4MATIC)                                                                                                 | 91000.00                     | 
+| Automobiles & Components           | Mercedes-Benz S-Class (S 500)                                                                                                      | 85000.00                     | 
+| Automobiles & Components           | Mercedes-Benz SL (SL 350)                                                                                                          | 72000.00                     | 
+| Capital Goods                      | Electric Motor                                                                                                                     | 70323.50                     | 
+| Automobiles & Components           | Mercedes-Benz SL-Class                                                                                                             | 69000.00                     | 
+| Automobiles & Components           | Mercedes-Benz S-Class Hybrid (S 400 h)                                                                                             | 66000.00                     | 
+| Automobiles & Components           | Mercedes-Benz CLS (350 BlueEFFICIENCY)                                                                                             | 60000.00                     | 
+| Automobiles & Components           | Mercedes-Benz CLS-Class                                                                                                            | 57100.00                     | 
+| Automobiles & Components           | Mercedes-Benz S-Class                                                                                                              | 54000.00                     | 
+| Capital Goods                      | Commercial Air Conditioner                                                                                                         | 51066.00                     | 
+| Automobiles & Components           | Mercedes-Benz S-Class Hybrid (S 300 BlueTEC HYBRID)                                                                                | 51000.00                     | 
+| Automobiles & Components           | Mercedes-Benz C-Class                                                                                                              | 50500.00                     | 
+| Automobiles & Components           | Mercedes-Benz E-Class (E 200)                                                                                                      | 50000.00                     | 
