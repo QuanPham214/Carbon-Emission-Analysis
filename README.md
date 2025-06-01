@@ -112,7 +112,7 @@ LIMIT 20;
 | Automobiles & Components           | Mercedes-Benz S-Class Hybrid (S 300 BlueTEC HYBRID)                                                                                | 51000.00                     | 
 | Automobiles & Components           | Mercedes-Benz C-Class                                                                                                              | 50500.00                     | 
 | Automobiles & Components           | Mercedes-Benz E-Class (E 200)                                                                                                      | 50000.00   
-| 
+
 ## Question 3: What are the industries with the highest contribution to carbon emissions?
 ```
 SELECT 
