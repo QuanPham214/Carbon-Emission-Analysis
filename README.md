@@ -161,3 +161,27 @@ LIMIT 10;
 | General Motors Company                  | 137007.00                  | 
 | "Lexmark International, Inc."           | 132012.00                  | 
 | "Daikin Industries, Ltd."               | 105600.00                  | 
+
+## Question 5:What are the countries with the highest contribution to carbon emissions?
+```
+SELECT 
+	country_name AS Country, 
+	ROUND(SUM(pe.carbon_footprint_pcf),2) AS Total_Carbon_Footprint_pcf
+FROM product_emissions AS pe
+	JOIN countries AS ct ON pe.company_id = ct.id
+GROUP BY country_name
+ORDER BY SUM(carbon_footprint_pcf) DESC
+LIMIT 10;
+```
+| Country      | Total_Carbon_Footprint_pcf | 
+| -----------: | -------------------------: | 
+| Germany      | 9778464.00                 | 
+| Lithuania    | 212016.00                  | 
+| Greece       | 191687.00                  | 
+| Japan        | 132012.00                  | 
+| Colombia     | 105600.00                  | 
+| South Africa | 35505.00                   | 
+| France       | 21364.00                   | 
+| Italy        | 20000.00                   | 
+| Ireland      | 11160.00                   | 
+| India        | 9328.00                    | 
