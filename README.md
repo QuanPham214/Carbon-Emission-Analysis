@@ -111,4 +111,29 @@ LIMIT 20;
 | Capital Goods                      | Commercial Air Conditioner                                                                                                         | 51066.00                     | 
 | Automobiles & Components           | Mercedes-Benz S-Class Hybrid (S 300 BlueTEC HYBRID)                                                                                | 51000.00                     | 
 | Automobiles & Components           | Mercedes-Benz C-Class                                                                                                              | 50500.00                     | 
-| Automobiles & Components           | Mercedes-Benz E-Class (E 200)                                                                                                      | 50000.00                     | 
+| Automobiles & Components           | Mercedes-Benz E-Class (E 200)                                                                                                      | 50000.00   
+| 
+## Question 3: What are the industries with the highest contribution to carbon emissions?
+```
+SELECT 
+	ig.industry_group, 
+	ROUND(SUM(pe.carbon_footprint_pcf),2) AS Total_Carbon_Footprint_pcf
+FROM product_emissions AS pe
+	 LEFT JOIN industry_groups AS ig ON pe.industry_group_id = ig.id
+GROUP BY industry_group
+ORDER BY AVG(carbon_footprint_pcf) DESC
+LIMIT 10;
+```
+
+| industry_group                                   | Total_Carbon_Footprint_pcf | 
+| -----------------------------------------------: | -------------------------: | 
+| Electrical Equipment and Machinery               | 9801558.00                 | 
+| Automobiles & Components                         | 2582264.00                 | 
+| "Pharmaceuticals, Biotechnology & Life Sciences" | 72486.00                   | 
+| Capital Goods                                    | 258712.00                  | 
+| Materials                                        | 577595.00                  | 
+| "Mining - Iron, Aluminum, Other Metals"          | 8181.00                    | 
+| Energy                                           | 10774.00                   | 
+| Chemicals                                        | 62369.00                   | 
+| Media                                            | 23017.00                   | 
+| Software & Services                              | 46544.00        
