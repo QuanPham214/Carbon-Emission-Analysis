@@ -186,3 +186,16 @@ LIMIT 10;
 | Ireland      | 11160.00                   | 
 | India        | 9328.00                    | 
 
+## Question 6: What is the trend of carbon footprints (PCFs) over the years?
+
+```
+SELECT 
+	pe.year, 
+	ROUND(AVG(pe.carbon_footprint_pcf),2) AS Average_Carbon_Footprint_pcf,
+	ROUND(SUM(pe.carbon_footprint_pcf),2) AS Total_Carbon_Footprint_pcf
+FROM product_emissions AS pe
+GROUP BY year
+ORDER BY year ASC
+```
+
+
