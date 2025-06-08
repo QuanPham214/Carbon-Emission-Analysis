@@ -202,4 +202,6 @@ ORDER BY year ASC
 
 ![Trend Of Total Carbon](/Images/Trend%20of%20Total%20Carbon.png)
 
-![Trend Of Total Carbon]()
+
+
+
