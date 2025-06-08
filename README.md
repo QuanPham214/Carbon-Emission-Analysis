@@ -197,5 +197,7 @@ FROM product_emissions AS pe
 GROUP BY year
 ORDER BY year ASC
 ```
+![Trend Of Average Carbon](/Images/Trend%20of%20Average%20Carbon.png)
 
 
+![Trend Of Total Carbon](/Images/Trend%20of%20Total%20Carbon.png)
